@@ -1,0 +1,67 @@
+%YAML 1.1
+--- # Configuration file for alexander version 1.0 Created by leonedavide[at]protonmail.com
+
+id_admin: [0]
+# ID or list of IDs of the admins; any admin will be able to access a number of functions by contacting the bot on Telegram.
+
+token: 'insert-your-token-here'
+# See: https://core.telegram.org/bots#6-botfather
+
+probability_setting: 1
+# You can adjust the number of inline feedback received, to get 1/1, 1/10, 1/100 or 1/1000 of them.
+# You can set this variable to 1, 10, 100, 1000 to count each feedback as 1, 10, 1000 or 1000 views, thus resulting in a more precise number of views.
+# See: https://core.telegram.org/bots/inline#collecting-feedback
+
+sorting_algorithm: 'views'
+# The sorting algorithm is used to sort audio results when an inline query is received. With any invalid setting query audios will be sorted based on where they appear in the database.
+# Valid entries: 'views' (more viewed to less viewed), 'title' (a to z), 'performer' (a to z), 'words_matched'
+
+append_less_relevant_results: false
+# If true, less relevant results will be appended after any other results.
+# This may be useful if you want the Bot to give more results for every query, even by sacrificing the precision
+
+custom_caption: null
+send_caption_every: 0
+# You can set a custom caption to be sent with audio files. The caption will be sent every n messages based on the value of the relative variable.
+# (To be more precise, the caption will be sent with a probability of 1/n)
+# If you do not want to use captions, either set it to null or set send_caption_every to 0
+# Caption are to be formatted in HTML and can have at most 1024 characters: https://core.telegram.org/bots/api#html-style
+
+cache_time: 300
+# When the software replies to a query like "hello", Telegram is able to maintain the answer given by the Bot in cache.
+# As long as the answer is in cache, any user searching "hello" will receive the cached answer with no action from the software.
+# A longer-life cache will result in less call received and less power consumed, but an answer will take longer to be amended.
+# You can set the cache_time, in seconds, according to your preferences.
+
+log_filename: 'alexander.log'
+database_filename: 'audio.json'
+# In some cases, it might be useful to specify the absolute path of log_filename and database_filename
+# You may also need to edit the main.py to specify the absolute path of this config.yaml file
+
+logging_level: WARNING
+
+source_url: 'https://github.com/davleone/alexander'
+
+messages_text:
+  welcome:  "Hi! @{username} is an inline Telegram Bot that you can use to search audio"
+  new_audio:  "This audio was successfully added to the database.\n\nPerformer: <i>{performer}</i>\n\nTitle: <i>{title}</i>\n\nFile ID: <code>{file_id}</code>\n\nIf you want to change the description of this audio, <b>send a text message in response to the audio</b>."
+  old_audio: "This audio was already added to the database by <a href=\"tg://user?id={added_by}\">{added_by}</a>\n\nViews: {views}\n\nFile ID: <code>{file_id}</code>.\n\nIf you want to change the description of this audio file, <b>send a text message in response to the audio</b>."
+  error_audio_unknown: "I am sorry but that audio file is not in my database.\nIf you want to add it to the database, send that audio again to me."
+  description_updated: "I have successfully update the description of that audio file with this text. When a user searches for an audio, the query entered is compared with the description of the audio file (and the title and performer metadata of the audio file)."
+  stat_command: "The database currently has {audio} audio file, and {views} views have been reported"
+  listed_success: "The audio file was re-listed successfully"
+  delisted_success: "The audio file was de-listed successfully"
+  remove_description_success: "The description for this audio file was removed successfully"
+  error_metadata: "I could not find the required metadata; please be sure that any audio file you send me contains metadata on the title and the performer."
+  delist_keyboard: "\u274E Delist this audio"
+  list_keyboard: " \u2705 Relist this audio"
+  remove_description_keyboard: "\u274E Delete description"
+  show_description_keyboard: "\U0001f4dd Show description"
+  source_code_keyboard: "Source code"
+  answer_no_description: "This audio does not have a description!"
+# Texts that the Bot will use when writing messages on Telegram. These can be customized according to your needs.
+# They have to be formatted in HTML: https://core.telegram.org/bots/api#html-style
+# new_audio, old_audio, description_updated, listed_success, delisted_success and remove_description_success support database keys as special keys (e.g. {file_id})
+# welcome accepts Bot-related {first_name} and {username} special keys
+# stat_command accepts the special keys {audio} for the total number of audio in the database and {views} for the total number of views recorded
+...
